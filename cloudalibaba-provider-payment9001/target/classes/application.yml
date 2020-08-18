@@ -1,0 +1,14 @@
+server:
+  port: 9001
+spring:
+  application:
+    name: nacos-payment-provider
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 192.168.142.131:8848 # 指明Nacos的地址
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'

@@ -1,0 +1,31 @@
+server:
+  port: 8401
+spring:
+  application:
+    name: cloudalibaba-sentinal-service
+  cloud:
+    nacos:
+      discovery:
+        # Nacos服务注册中心地址
+        server-addr: 192.168.142.131:8848
+    sentinel:
+      datasource:
+        ds1:
+          nacos:
+            server-addr: 192.168.142.131:8848
+            dataId: ${spring.application.name}
+            groupId: DEFAULT_GROUP
+            data-type: json
+            rule-type: flow
+      transport:
+        # 配置Sentinel dashboard地址
+        dashboard: localhost:8080 # Windows安装Sentinel，Dashboard的地址
+        #dashboard: 192.168.142.131:8858 # Linux里Docker运行Sentinel，Dashboard的地址
+        # 应用程序与Sentinel进行交互的端口，用于传输数据，如果端口被占用，Sentinel会尝试采用端口+1，直到找到可用端口
+        port: 8719
+      eager: true # 取消延迟加载（默认是延迟加载的）
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
